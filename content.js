@@ -1,5 +1,5 @@
 // Very simple functionality for adding a banner to webpages
-
+alert("Content script loaded!");
 // Function to create and add the banner
 function addBanner() {
   // Create a new div element for our banner
@@ -17,3 +17,17 @@ function addBanner() {
 
 // Run our function when the page loads
 window.addEventListener('load', addBanner);
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === "url_changed") {
+    console.log("Content script notified of URL change:", request.url);
+    
+    // Re-run your page scraping or UI injection logic here
+    initializeMyExtension();
+  }
+});
+
+function initializeMyExtension() {
+  // Your code here
+}
+
